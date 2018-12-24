@@ -213,6 +213,7 @@ s32 isInMiiMakerHBL(){
 }
 
 void Init_SD_USB() {
+    /*
     int res = IOSUHAX_Open(NULL);
     if(res < 0){
         ExecuteIOSExploitWithDefaultConfig();
@@ -242,6 +243,14 @@ void Init_SD_USB() {
             gSDInitDone |= SD_MOUNTED_LIBFAT;
             gSDInitDone |= USB_MOUNTED_LIBFAT;
         }
+    }
+    */
+
+    if((int res = mount_sd_fat("sd")) >= 0){
+        DEBUG_FUNCTION_LINE("mount_sd_fat success\n");
+        gSDInitDone = SDUSB_MOUNTED_OS_SD;
+    }else{
+        DEBUG_FUNCTION_LINE("mount_sd_fat failed %d\n",res);
     }
     DEBUG_FUNCTION_LINE("%08X\n",gSDInitDone);
 }
