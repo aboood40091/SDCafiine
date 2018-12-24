@@ -26,7 +26,6 @@
 #include "common/retain_vars.h"
 #include "system/exception_handler.h"
 #include "system/CThread.h"
-#include "myutils/mocha.h"
 #include "myutils/libfat.h"
 #include "myutils/libntfs.h"
 
@@ -246,7 +245,8 @@ void Init_SD_USB() {
     }
     */
 
-    if((int res = mount_sd_fat("sd")) >= 0){
+    int res;
+    if((res = mount_sd_fat("sd")) >= 0){
         DEBUG_FUNCTION_LINE("mount_sd_fat success\n");
         gSDInitDone = SDUSB_MOUNTED_OS_SD;
     }else{
